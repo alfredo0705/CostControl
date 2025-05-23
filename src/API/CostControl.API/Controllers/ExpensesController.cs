@@ -4,10 +4,12 @@ using CostControl.Application.DTOs.Movement;
 using CostControl.Application.Features.Expense.Requests.Commands;
 using CostControl.Application.Features.Expense.Requests.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CostControl.API.Controllers
 {
+    [Authorize]
     public class ExpensesController : BaseApiController
     {
         private readonly IMediator _mediator;

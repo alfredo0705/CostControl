@@ -1,10 +1,12 @@
 ﻿using CostControl.Application.Models.Identity;
 using CostControl.Identity.Contracts;
 using CostControl.Identity.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CostControl.API.Controllers
 {
+    [Authorize]
     public class UsersController : BaseApiController
     {
         private readonly IAplicationUserRepository _userRepository;

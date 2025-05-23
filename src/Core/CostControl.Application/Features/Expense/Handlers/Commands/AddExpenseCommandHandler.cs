@@ -74,6 +74,7 @@ namespace CostControl.Application.Features.Expense.Handlers.Commands
                         throw new InvalidOperationException($"Presupuesto excedido en:\n{string.Join("\n", overSpent)}");
 
                     await _unitOfWork.ExpenseRepository.CreateExpenseAsync(header);
+
                     await _unitOfWork.SaveAsync();
                     await transaction.CommitAsync();
 

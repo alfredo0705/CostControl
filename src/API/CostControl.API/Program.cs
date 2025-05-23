@@ -46,28 +46,36 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+var clientPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "browser");
+
 app.UseHttpsRedirection();
 
-app.UseRouting();
 
-app.UseCors("AllowAll");
-
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.UseDefaultFiles();
-
-app.UseStaticFiles(new StaticFileOptions
+// Configura para que use los archivos estáticos de wwwroot/browser como raíz:
+app.UseDefaultFiles(new DefaultFilesOptions
 {
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "browser")),
+    FileProvider = new PhysicalFileProvider(clientPath),
     RequestPath = ""
 });
 
-app.UseEndpoints(endpoints =>
+app.UseStaticFiles(new StaticFileOptions
 {
-    endpoints.MapControllers();
-    endpoints.MapFallbackToController("Index", "Fallback");
+    FileProvider = new PhysicalFileProvider(clientPath),
+    RequestPath = ""
+});
+
+app.UseRouting();
+app.UseCors("AllowAll");
+app.UseAuthentication();
+app.UseAuthorization();
+
+// Rutas API, autenticación, etc.
+app.MapControllers();
+
+// Fallback a index.html para SPA 
+app.MapFallbackToFile("index.html", new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(clientPath)
 });
 
 using (var scope = app.Services.CreateScope())

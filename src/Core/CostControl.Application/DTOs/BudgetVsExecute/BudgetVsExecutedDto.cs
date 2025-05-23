@@ -11,5 +11,7 @@ namespace CostControl.Application.DTOs.BudgetVsExecute
         public string ExpenseType { get; set; }
         public decimal BudgetedAmount { get; set; }
         public decimal ExecutedAmount { get; set; }
+        public string Month { get; set; }
+        public int UserId { get; set; }
     }
 }

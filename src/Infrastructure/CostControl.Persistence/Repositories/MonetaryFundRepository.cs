@@ -41,18 +41,17 @@ namespace CostControl.Persistence.Repositories
             return _mapper.Map<MonetaryFundDto>(monetary);
         }
 
-        public async Task<MonetaryFundDto> GetByUserIdAndNameAsync(int appUserId, string name)
+        public async Task<MonetaryFundDto> GetByUserIdAndNameAsync(string name)
         {
-            var monetary = await _context.MonetaryFunds.Where(m => m.AppUserId == appUserId && m.Name.Value == name).FirstOrDefaultAsync();
+            var monetary = await _context.MonetaryFunds.Where(m => m.Name.Value == name).FirstOrDefaultAsync();
 
             return _mapper.Map<MonetaryFundDto>(monetary);
         }
 
-        public async Task<IEnumerable<MonetaryFundDto>> GetFundsByUserIdAsync(int appUserId)
+        public async Task<IEnumerable<MonetaryFundDto>> GetFundsByUserIdAsync()
         {
             return await _context.MonetaryFunds
                 .AsNoTracking()
-                .Where(m => m.AppUserId == appUserId)
                 .ProjectTo<MonetaryFundDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
         }

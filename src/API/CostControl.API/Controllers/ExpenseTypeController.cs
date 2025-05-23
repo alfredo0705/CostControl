@@ -2,10 +2,12 @@
 using CostControl.Application.Features.ExpenseType.Requests.Commands;
 using CostControl.Application.Features.ExpenseType.Requests.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CostControl.API.Controllers
 {
+    [Authorize]
     public class ExpenseTypeController : BaseApiController
     {
         private readonly IMediator _mediator;

@@ -6,6 +6,7 @@ namespace CostControl.Application.Features.Budget.Requests.Commands
 {
     public class AddBudgetCommand : IRequest<BaseCommandResponse>
     {
-        public BudgetCreateDto BudgetCreateDto { get; set; }
+        public List<BudgetCreateDto> BudgetCreateDto { get; set; }
+        public int UserId { get; set; }
     }
 }

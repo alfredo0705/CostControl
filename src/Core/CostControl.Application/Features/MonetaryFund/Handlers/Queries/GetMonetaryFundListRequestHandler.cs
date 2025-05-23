@@ -16,7 +16,7 @@ namespace CostControl.Application.Features.MonetaryFund.Handlers.Queries
 
         public async Task<List<MonetaryFundDto>> Handle(GetMonetaryFundListRequest request, CancellationToken cancellationToken)
         {
-            var monetaryFunds = await _unitOfWork.MonetaryFundRepository.GetFundsByUserIdAsync(request.UserId);
+            var monetaryFunds = await _unitOfWork.MonetaryFundRepository.GetFundsByUserIdAsync();
 
             return monetaryFunds.ToList();
         }

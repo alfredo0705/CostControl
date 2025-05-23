@@ -33,7 +33,6 @@ namespace CostControl.Application.Features.MonetaryFund.Handlers.Commands
 
                 var monetaryFund = new Domain.Entity.MonetaryFund
                 {
-                    AppUserId = request.MonetaryFundCreateDto.AppUserId,
                     Name = new(request.MonetaryFundCreateDto.Name),
                     Type = request.MonetaryFundCreateDto.Type,
                     InitialBalance = request.MonetaryFundCreateDto.InitialBalance,

@@ -39,6 +39,9 @@ namespace CostControl.Application.Features.Deposit.Handlers.Commands
                 };
 
                 await _unitOfWork.DepositRepository.AddDeposit(deposit);
+
+
+
                 await _unitOfWork.SaveAsync();
 
                 response.Success = true;

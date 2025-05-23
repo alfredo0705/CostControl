@@ -2,7 +2,9 @@
 using CostControl.Application.DTOs.Budget.Validator;
 using CostControl.Application.Features.Budget.Requests.Commands;
 using CostControl.Application.Responses;
+using FluentValidation;
 using MediatR;
+using System.Linq;
 
 namespace CostControl.Application.Features.Budget.Handlers.Commands
 {
@@ -20,26 +22,31 @@ namespace CostControl.Application.Features.Budget.Handlers.Commands
             var response = new BaseCommandResponse();
             try
             {
-                var validator = new BudgetCreateDtoValidator();
-                var validationResult = validator.Validate(request.BudgetCreateDto);
-                if (!validationResult.IsValid)
+                foreach (var item in request.BudgetCreateDto)
                 {
-                    response.Success = false;
-                    response.Message = "Creación fallida";
+                    var validator = new BudgetCreateDtoValidator();
+                    var validationResult = validator.Validate(item);
+                    if (!validationResult.IsValid)
+                    {
+                        response.Success = false;
+                        response.Message = "Creación fallida";
 
-                    return response;
+                        return response;
+                    }
+
+                    var budget = new Domain.Entity.Budget
+                    {
+                        Amount = item.Amount,
+                        AppUserId = request.UserId,
+                        ExpenseTypeId = item.ExpenseTypeId,
+                        Month = item.Month,
+                        Year = item.Year
+                    };
+
+                    await _unitOfWork.BudgetRepository.AddAsync(budget);
+
                 }
 
-                var budget = new Domain.Entity.Budget
-                {
-                    Amount = request.BudgetCreateDto.Amount,
-                    AppUserId = request.BudgetCreateDto.AppUserId,
-                    ExpenseTypeId = request.BudgetCreateDto.ExpenseTypeId,
-                    Month = request.BudgetCreateDto.Month,
-                    Year = request.BudgetCreateDto.Year
-                };
-
-                await _unitOfWork.BudgetRepository.AddAsync(budget);
                 await _unitOfWork.SaveAsync();
 
                 response.Success = true;

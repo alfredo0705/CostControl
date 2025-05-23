@@ -6,9 +6,6 @@ namespace CostControl.Application.DTOs.Budget.Validator
     {
         public BudgetDtoValidator()
         {
-            RuleFor(x => x.AppUserId)
-                .GreaterThan(0).WithMessage("Debe seleccionarse un usuario válido.");
-
             RuleFor(x => x.ExpenseTypeId)
                 .GreaterThan(0).WithMessage("Debe seleccionarse un tipo de gasto válido.");
 

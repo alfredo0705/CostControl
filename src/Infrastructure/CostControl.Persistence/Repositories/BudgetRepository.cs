@@ -108,7 +108,9 @@ namespace CostControl.Persistence.Repositories
             {
                 ExpenseType = type,
                 BudgetedAmount = budgets.FirstOrDefault(b => b.ExpenseType == type)?.Budgeted ?? 0,
-                ExecutedAmount = expenses.FirstOrDefault(e => e.ExpenseType == type)?.Executed ?? 0
+                ExecutedAmount = expenses.FirstOrDefault(e => e.ExpenseType == type)?.Executed ?? 0,
+                Month = $"{filter.From.Year}-{filter.From.Month}",
+                UserId = userId
             }).ToList();
 
             return result;

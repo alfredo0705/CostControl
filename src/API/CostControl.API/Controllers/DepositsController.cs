@@ -2,10 +2,12 @@
 using CostControl.Application.DTOs.Deposit;
 using CostControl.Application.Features.Deposit.Requests.Commands;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CostControl.API.Controllers
 {
+    [Authorize]
     public class DepositsController : BaseApiController
     {
         private readonly IMediator _mediator;

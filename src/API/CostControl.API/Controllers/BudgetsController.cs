@@ -4,10 +4,12 @@ using CostControl.Application.DTOs.BudgetVsExecute;
 using CostControl.Application.Features.Budget.Requests.Commands;
 using CostControl.Application.Features.Budget.Requests.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CostControl.API.Controllers
 {
+    [Authorize]
     public class BudgetsController : BaseApiController
     {
         private readonly IMediator _mediator;
@@ -30,9 +32,9 @@ namespace CostControl.API.Controllers
         }
 
         [HttpPost("addBudget")]
-        public async Task<ActionResult> AddBudget(BudgetCreateDto budgetCreateDto)
+        public async Task<ActionResult> AddBudget(List<BudgetCreateDto> budgetCreateDto)
         {
-            var result = await _mediator.Send(new AddBudgetCommand { BudgetCreateDto = budgetCreateDto });
+            var result = await _mediator.Send(new AddBudgetCommand { BudgetCreateDto = budgetCreateDto, UserId = User.GetUserId() });
             if (result.Success)
                 return NoContent();
 

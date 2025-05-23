@@ -21,13 +21,13 @@ namespace CostControl.API.Controllers
         [HttpGet("getMonetaryFunds")]
         public async Task<ActionResult<List<MonetaryFundDto>>> GetMonetaryFunds()
         {
-            return Ok(await _mediator.Send(new GetMonetaryFundListRequest { UserId = User.GetUserId() }));
+            return Ok(await _mediator.Send(new GetMonetaryFundListRequest()));
         }
 
         [HttpGet("getMonetaryFund")]
         public async Task<ActionResult<MonetaryFundDto>> GetMonetaryFund(string monetaryFoundName)
         {
-            return Ok(await _mediator.Send(new GetMonetaryFundRequest { MonetaryFoundName = monetaryFoundName, UserId = User.GetUserId() }));
+            return Ok(await _mediator.Send(new GetMonetaryFundRequest { MonetaryFoundName = monetaryFoundName }));
         }
         
         [HttpGet("getMonetaryFundById")]
@@ -39,7 +39,6 @@ namespace CostControl.API.Controllers
         [HttpPost("addMonetaryFund")]
         public async Task<ActionResult> AddMonetaryFund(MonetaryFundCreateDto monetaryFundCreateDto)
         {
-            monetaryFundCreateDto.AppUserId = User.GetUserId();
             var result = await _mediator.Send(new AddMonetaryFundCommand { MonetaryFundCreateDto = monetaryFundCreateDto });
 
             if (result.Success)
