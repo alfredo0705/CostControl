@@ -1,0 +1,46 @@
+<h2 class="page-title">Depósitos</h2>
+
+<div class="form-container">
+  <dx-form [formData]="deposit" [colCount]="2" labelLocation="top">
+  <dxi-item
+    dataField="date"
+    editorType="dxDateBox"
+    [editorOptions]="{ 
+      type: 'date', 
+      displayFormat: 'yyyy-MM-dd', 
+      stylingMode: 'filled' 
+    }"
+    [isRequired]="true"
+    label="Fecha"
+  ></dxi-item>
+
+  <dxi-item
+    dataField="monetaryFundId"
+    editorType="dxSelectBox"
+    [editorOptions]="{
+      dataSource: monetaryFunds,
+      displayExpr: 'name',
+      valueExpr: 'id', 
+      stylingMode: 'filled'
+    }"
+    [isRequired]="true"
+    label="Fondo Monetario"
+  ></dxi-item>
+
+  <dxi-item
+    dataField="amount"
+    editorType="dxNumberBox"
+    [editorOptions]="{ 
+      showSpinButtons: true, 
+      format: 'currency', 
+      stylingMode: 'filled' 
+    }"
+    [isRequired]="true"
+    label="Monto"
+  ></dxi-item>
+  </dx-form>
+</div>
+
+<div class="button-container">
+  <dx-button text="Guardar" type="success" (onClick)="onSubmit()"></dx-button>
+</div>

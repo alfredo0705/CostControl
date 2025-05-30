@@ -1,0 +1,26 @@
+<div class="page-container">
+  <div class="page-header">
+    <h2 class="page-title">Fondo monetario</h2>
+    <a class="btn btn-primary" routerLink="/monetary-fund-create">+ Nuevo fondo monetario</a>
+  </div>
+
+  <div class="item-list">
+    <div *ngFor="let item of monetaryFunds" class="item-card">
+      <div class="item-header">
+        <h3 class="item-name">{{ item.name }}</h3>
+        <span class="item-code">Tipo: {{ item.type }}</span>
+      </div>
+      <p class="item-description"><strong>Balance inicial: </strong>{{ item.initialBalance }}</p>
+      <p class="item-description"><strong>Balance actual: </strong>{{ item.currentBalance }}</p>
+      
+      <div class="item-actions">
+        <button class="btn btn-outline-primary" [routerLink]="'/monetary-fund-update/' + item.id">
+          Editar
+        </button>
+        <button class="btn btn-outline-danger" (click)="deleteMonetaryFund(item.id)">
+          Borrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<h2 class="page-title">Presupuesto por usuario y tipo de gasto</h2>
+
+<div class="form-container">
+  <dx-form [formData]="filter" [colCount]="2" labelLocation="top" (onSubmit)="onSubmit()">
+   
+  <dxi-item 
+  dataField="filter.from" 
+  [label]="{ text: 'Desde' }"
+  [editorType]="'dxDateBox'">
+  <div *dxTemplate="let data of 'content'">
+    <dx-date-box 
+      [(value)]="filter.from"
+      stylingMode="filled"
+      [displayFormat]="'dd/MM/yyyy'"
+      placeholder="Seleccione la fecha final">
+    </dx-date-box>
+  </div>
+</dxi-item>
+  
+  <dxi-item 
+  dataField="filter.to" 
+  [label]="{ text: 'Hasta' }"
+  [editorType]="'dxDateBox'">
+  <div *dxTemplate="let data of 'content'">
+    <dx-date-box 
+      [(value)]="filter.to"
+      stylingMode="filled"
+      [displayFormat]="'dd/MM/yyyy'"
+      placeholder="Seleccione la fecha final">
+    </dx-date-box>
+  </div>
+</dxi-item>
+
+  <dxi-item [colSpan]="2">
+    <div *dxTemplate="let data of 'content'" style="text-align: right">
+      <dx-button text="Consultar" type="success" (onClick)="onSubmit()"></dx-button>
+    </div>
+  </dxi-item>
+  </dx-form>
+</div>
+
+<div class="grid-container">
+  <dx-data-grid
+    [dataSource]="movements"
+    [showBorders]="true"
+    [columnAutoWidth]="true"
+    [rowAlternationEnabled]="true"
+  >
+    <dxo-paging [enabled]="true" [pageSize]="10"></dxo-paging>
+    <dxo-pager
+      [showPageSizeSelector]="true"
+      [allowedPageSizes]="[5, 10, 20]"
+      [showInfo]="true"
+    ></dxo-pager>
+
+    <dxi-column dataField="movementType" caption="Tipo de Movimiento"></dxi-column>
+    <dxi-column dataField="date" caption="Fecha" dataType="date"></dxi-column>
+    <dxi-column dataField="fundName" caption="Fondo Monetario"></dxi-column>
+    <dxi-column dataField="amount" caption="Monto" format="currency"></dxi-column>
+    
+    <!-- Solo visible si es gasto -->
+    <dxi-column dataField="expenseType" caption="Tipo de Gasto"></dxi-column>
+    <dxi-column dataField="storeName" caption="Tienda"></dxi-column>
+    <dxi-column dataField="documentType" caption="Tipo de Documento"></dxi-column>
+  </dx-data-grid>
+</div>

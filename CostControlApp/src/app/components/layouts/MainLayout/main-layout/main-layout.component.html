@@ -1,0 +1,40 @@
+<dx-toolbar id="toolbar">
+  <dxi-item
+    widget="dxButton"
+    [options]="buttonOptions"
+    location="before">
+  </dxi-item>
+  <dxi-item
+    location="center"
+    text="Control de Costos">
+  </dxi-item>
+</dx-toolbar>
+
+<dx-drawer
+  template="menu"
+  [(opened)]="drawerOpened"
+  [minSize]="250"
+  [maxSize]="250"
+  [revealMode]="'expand'"
+  [openedStateMode]="'shrink'"
+  [shading]="false"
+  position="left">
+
+  <!-- MENU TEMPLATE -->
+  <div *dxTemplate="let data of 'menu'" class="menu-container">
+    <div *ngFor="let group of navigation" class="menu-group">
+      <div class="menu-group-title">{{ group.text }}</div>
+      <dx-list
+        [items]="group.items"
+        displayExpr="text"
+        selectionMode="single"
+        (onItemClick)="navigate($event.itemData.path)">
+      </dx-list>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div id="view" class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+</dx-drawer>

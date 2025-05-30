@@ -1,0 +1,53 @@
+<h2 class="page-title">Asignación de Presupuesto Mensual</h2>
+
+<div class="form-container">
+  <dx-form [formData]="form" [colCount]="2" labelLocation="top">
+    <!-- Mes -->
+    <dxi-item>
+    <dx-date-box
+      [(value)]="form.month"
+      [displayFormat]="'MMMM yyyy'"
+      [pickerType]="'calendar'"
+      [type]="'date'"
+      [stylingMode]="'filled'"
+      placeholder="Seleccione el mes"
+      (onValueChanged)="onMonthChanged($event)"
+    ></dx-date-box>
+  </dxi-item>
+</dx-form>
+</div>
+
+<div class="grid-container">
+  <dx-data-grid
+    [dataSource]="budgetByExpenseType"
+    [showBorders]="true"
+    [editing]="{
+      mode: 'cell',
+      allowUpdating: true,
+      useIcons: true
+    }"
+    [rowAlternationEnabled]="true"
+    [columnAutoWidth]="true"
+    style="min-height: 300px;"
+  >
+    <dxi-column
+      dataField="expenseTypeName"
+      caption="Tipo de Gasto"
+      [allowEditing]="false"
+      width="60%"
+    ></dxi-column>
+
+    <dxi-column
+      dataField="amount"
+      caption="Monto Presupuestado"
+      dataType="number"
+      [editorOptions]="{ format: '#,##0.##', showClearButton: true }"
+      width="40%"
+    ></dxi-column>
+  </dx-data-grid>
+</div>
+
+<div class="button-container">
+  <dx-button text="Guardar" type="success" (onClick)="onSave()"></dx-button>
+</div>
+

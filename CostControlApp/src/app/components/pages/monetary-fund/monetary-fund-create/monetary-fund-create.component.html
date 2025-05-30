@@ -1,0 +1,57 @@
+<h2 class="page-title">Nuevo Fondo Monetario</h2>
+
+<div class="form-container">
+  <dx-form [formData]="monetaryFund" [colCount]="1" labelLocation="top" (onSubmit)="onSubmit()">
+
+    <dxi-item
+      dataField="name"
+      [label]="{ text: 'Nombre del Fondo' }"
+      [editorType]="'dxTextBox'"
+      [editorOptions]="{ 
+        placeholder: 'Ej. Caja Menor Principal, Cuenta Bancaria ABC', 
+        stylingMode: 'filled' }"
+    ></dxi-item>
+
+    <dxi-item
+      dataField="type"
+      [label]="{ text: 'Tipo de Fondo' }"
+      [editorType]="'dxSelectBox'"
+      [editorOptions]="{
+        items: types,
+        placeholder: 'Seleccione un tipo', 
+        stylingMode: 'filled'
+      }"
+    ></dxi-item>
+
+    <!-- Saldo Inicial -->
+    <dxi-item
+      dataField="initialBalance"
+      [label]="{ text: 'Saldo Inicial' }"
+      [editorType]="'dxNumberBox'"
+      [editorOptions]="{
+        showSpinButtons: true,
+        format: '#,##0.##',
+        placeholder: 'Ej. 1000.00', 
+        stylingMode: 'filled'
+      }"
+    ></dxi-item>
+  </dx-form>
+</div>
+
+<div class="button-container">
+        <dx-button
+          text="Guardar"
+          type="success"
+          stylingMode="contained"
+          width="120"
+          (onClick)="onSubmit()"
+        ></dx-button>
+      <dx-button
+        text="Cancelar"
+        type="danger"
+        stylingMode="contained"
+        width="120"
+        (onClick)="goBack()"
+      ></dx-button>
+</div>
+

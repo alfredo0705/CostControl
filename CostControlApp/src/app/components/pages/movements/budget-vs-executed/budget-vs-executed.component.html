@@ -1,0 +1,78 @@
+<h2 class="page-title">Presupuesto vs Ejecución por Tipo de Gasto</h2>
+
+<div class="form-container">
+  <dx-form [formData]="filter" [colCount]="2" labelLocation="top" (onSubmit)="onSubmit()">
+ 
+  <dxi-item 
+  dataField="filter.from" 
+  [label]="{ text: 'Desde' }"
+  [editorType]="'dxDateBox'">
+  <div *dxTemplate="let data of 'content'">
+    <dx-date-box 
+      [(value)]="filter.from"
+      stylingMode="filled"
+      [displayFormat]="'dd/MM/yyyy'"
+      placeholder="Seleccione la fecha final">
+    </dx-date-box>
+  </div>
+</dxi-item>
+  
+  <dxi-item 
+  dataField="filter.to" 
+  [label]="{ text: 'Hasta' }"
+  [editorType]="'dxDateBox'">
+  <div *dxTemplate="let data of 'content'">
+    <dx-date-box 
+      [(value)]="filter.to"
+      stylingMode="filled"
+      [displayFormat]="'dd/MM/yyyy'"
+      placeholder="Seleccione la fecha final">
+    </dx-date-box>
+  </div>
+</dxi-item>
+
+
+  <dxi-item [colSpan]="2">
+    <div *dxTemplate="let data of 'content'" style="text-align: right">
+      <dx-button text="Consultar" type="success" (onClick)="onSubmit()"></dx-button>
+    </div>
+  </dxi-item>
+  </dx-form>
+</div>
+
+<div class="grid-container">
+<dx-chart
+  [dataSource]="budgetVsExecuted"
+  title="Presupuesto vs Ejecución por Tipo de Gasto"
+  palette="Material"
+  [rotated]="false"
+>
+  <dxi-series
+    valueField="budgetedAmount"
+    name="Presupuestado"
+    argumentField="expenseType"
+    type="bar"
+    color="#1976d2"
+  ></dxi-series>
+
+  <dxi-series
+    valueField="executedAmount"
+    name="Ejecutado"
+    argumentField="expenseType"
+    type="bar"
+    color="#43a047"
+  ></dxi-series>
+
+  <dxo-tooltip
+    [enabled]="true"
+    [shared]="true"
+    [format]="{ type: 'currency', precision: 0 }"
+  ></dxo-tooltip>
+
+  <dxo-legend
+    orientation="horizontal"
+    verticalAlignment="bottom"
+    horizontalAlignment="center"
+  ></dxo-legend>
+</dx-chart>
+</div>

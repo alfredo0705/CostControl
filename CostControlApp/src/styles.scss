@@ -1,0 +1,112 @@
+/* You can add global styles to this file, and also import other style files */
+.page-container {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+}
+
+.page-title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.item-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.item-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.item-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.item-description {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.btn-details {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-details:hover {
+  background-color: #0056b3;
+}
+
+
+/* Estilo general para títulos */
+.page-title {
+  font-weight: 700;
+  font-size: 28px;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+/* Estilo general para subtítulos/secciones */
+.section-title {
+  font-weight: 600;
+  font-size: 22px;
+  color: #34495e;
+  margin-top: 40px;
+  margin-bottom: 15px;
+}
+
+/* Contenedor general para formularios */
+.form-container {
+  max-width: 700px;
+  margin-bottom: 30px;
+}
+
+/* Contenedor para tablas / grids */
+.grid-container {
+  max-width: 900px;
+  margin-bottom: 30px;
+}
+
+/* Botones alineados a la derecha */
+.button-container {
+  max-width: 700px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+/* Inputs DevExtreme con estilo uniforme */
+.dx-textbox,
+.dx-selectbox,
+.dx-numberbox,
+.dx-datebox,
+.dx-textarea,
+.dx-datebox {
+  --dx-border-radius: 6px;
+  --dx-border-color: #bbb;
+  --dx-bg-color: #fff;
+  --dx-focus-border-color: #0078d4; /* azul corporativo */
+}
+
+/* Padding y espaciado interno */
+.dx-field {
+  padding: 8px 0;
+}
+
+/* Colocar el label encima de los inputs */
+.dx-field-label, .dx-texteditor {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #3a3a3a;
+}

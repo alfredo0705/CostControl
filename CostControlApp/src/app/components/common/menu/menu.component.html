@@ -1,0 +1,12 @@
+<div class="menu-panel">
+  <ng-container *ngFor="let group of menuItems">
+    <div class="menu-group-title">{{ group.text }}</div>
+    <dx-list
+      *ngIf="group.items?.length"
+      [items]="group.items"
+      displayExpr="text"
+      class="sublist"
+      (onItemClick)="navigate($event.itemData.path)">
+    </dx-list>
+  </ng-container>
+</div>

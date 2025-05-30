@@ -1,0 +1,29 @@
+.main-content {
+  padding: 15px;
+}
+
+.menu-group-title {
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #444;
+}
+
+.sublist ::ng-deep .dx-list-item {
+  padding-left: 20px;
+}
+
+.menu-btn {
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 18px;
+  vertical-align: middle;
+}

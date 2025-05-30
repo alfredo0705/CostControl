@@ -1,0 +1,25 @@
+<div class="page-container">
+  <div class="page-header">
+    <h2 class="page-title">Tipos de Gasto</h2>
+    <a class="btn btn-primary" routerLink="/expense-type-create">+ Nuevo tipo de gasto</a>
+  </div>
+
+  <div class="item-list">
+    <div *ngFor="let item of expenseTypes" class="item-card">
+      <div class="item-header">
+        <h3 class="item-name">{{ item.name }}</h3>
+        <span class="item-code">#{{ item.code }}</span>
+      </div>
+      <p class="item-description">{{ item.description }}</p>
+      
+      <div class="item-actions">
+        <button class="btn btn-outline-primary" [routerLink]="'/expense-type-update/' + item.id">
+          Editar
+        </button>
+        <button class="btn btn-outline-danger" (click)="deleteExpenseType(item.id)">
+          Borrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

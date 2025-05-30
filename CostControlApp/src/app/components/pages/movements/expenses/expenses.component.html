@@ -1,0 +1,88 @@
+<h2 class="page-title">Registro de Gasto</h2>
+
+<div class="form-container">
+  <dx-form [formData]="expense" [colCount]="2" labelLocation="top">
+    <dxi-item 
+    dataField="date" 
+    [editorType]="'dxDateBox'" 
+    [editorOptions]="{ type: 'date', stylingMode: 'filled', placeholder: 'Seleccione la fecha' }"
+    [label]="{ text: 'Fecha del Gasto' }"
+  >
+  </dxi-item>
+
+  <dxi-item 
+    dataField="monetaryFundId" 
+    [editorType]="'dxSelectBox'"
+    [editorOptions]="{ 
+      items: monetaryFunds, 
+      valueExpr: 'id', 
+      displayExpr: 'name', 
+      placeholder: 'Seleccione el fondo',
+      stylingMode: 'filled'
+    }"
+    [label]="{ text: 'Fondo Monetario' }"
+  >
+  </dxi-item>
+
+  <dxi-item 
+    dataField="storeName" 
+    [editorType]="'dxTextBox'" 
+    [editorOptions]="{ placeholder: 'Nombre del comercio', stylingMode: 'filled' }"
+    [label]="{ text: 'Comercio' }"
+  >
+  </dxi-item>
+
+  <dxi-item 
+    dataField="documentType" 
+    [editorType]="'dxSelectBox'"
+    [editorOptions]="{ items: documentTypes, placeholder: 'Tipo de documento', stylingMode: 'filled' }"
+    [label]="{ text: 'Tipo de Documento' }"
+  >
+  </dxi-item>
+
+  <dxi-item 
+    dataField="notes" 
+    [editorType]="'dxTextArea'" 
+    [colSpan]="2" 
+    [editorOptions]="{ placeholder: 'Observaciones', height: 80, stylingMode: 'filled' }"
+    [label]="{ text: 'Observaciones' }"
+  >
+  </dxi-item>
+  </dx-form>
+</div>
+
+<div class="grid-container">
+<h3 class="section-title">Detalles del Gasto</h3>
+ <dx-data-grid 
+  [dataSource]="expense.details" 
+  [showBorders]="true" 
+  [editing]="{ mode: 'form', allowAdding: true, allowUpdating: true, allowDeleting: true }" 
+  [keyExpr]="'tempId'"
+  class="details-grid"
+  [columnAutoWidth]="true"
+  [rowAlternationEnabled]="true"
+>
+  <dxi-column 
+    dataField="expenseTypeId" 
+    caption="Tipo de Gasto" 
+    [lookup]="{ dataSource: expenseTypes, valueExpr: 'id', displayExpr: 'name' }"
+    [validationRules]="[{ type: 'required', message: 'Seleccione un tipo de gasto' }]"
+  ></dxi-column>
+
+  <dxi-column 
+    dataField="amount" 
+    caption="Monto" 
+    dataType="number" 
+    format="#,##0.00"
+    [validationRules]="[
+      { type: 'required', message: 'Ingrese un monto' },
+      { type: 'numeric', message: 'El monto debe ser numérico' },
+      { type: 'range', min: 0.01, message: 'El monto debe ser mayor a cero' }
+    ]"
+  ></dxi-column>
+</dx-data-grid>
+</div>
+
+<div class="button-container">
+  <dx-button text="Guardar" type="success" (onClick)="onSave()"></dx-button>
+</div>

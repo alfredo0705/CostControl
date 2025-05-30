@@ -1,0 +1,78 @@
+<h2>Nuevo Usuario</h2>
+
+<dx-form
+  [formData]="user"
+  [colCount]="2"
+  labelLocation="top"
+  (onSubmit)="onSubmit()"
+>
+  <!-- Username -->
+  <dxi-item dataField="username" [editorType]="'dxTextBox'" [editorOptions]="{ placeholder: 'Ingrese el nombre de usuario' }">
+    <div *dxTemplate="let data of 'content'">
+      <dx-text-box [(value)]="user.username"></dx-text-box>
+    </div>
+  </dxi-item>
+
+  <!-- Documento de Identidad -->
+  <dxi-item dataField="documentId" [editorType]="'dxTextBox'" [editorOptions]="{ placeholder: 'Ingrese el documento de identidad' }">
+    <div *dxTemplate="let data of 'content'">
+      <dx-text-box [(value)]="user.documentId"></dx-text-box>
+    </div>
+  </dxi-item>
+
+  <!-- Nombres -->
+  <dxi-item dataField="firstName" [editorType]="'dxTextBox'" [editorOptions]="{ placeholder: 'Ingrese los nombres' }">
+    <div *dxTemplate="let data of 'content'">
+      <dx-text-box [(value)]="user.firstName"></dx-text-box>
+    </div>
+  </dxi-item>
+
+  <!-- Apellidos -->
+  <dxi-item dataField="lastName" [editorType]="'dxTextBox'" [editorOptions]="{ placeholder: 'Ingrese los apellidos' }">
+    <div *dxTemplate="let data of 'content'">
+      <dx-text-box [(value)]="user.lastName"></dx-text-box>
+    </div>
+  </dxi-item>
+
+  <!-- Correo -->
+  <dxi-item dataField="email" [editorType]="'dxTextBox'" [editorOptions]="{ placeholder: 'Ingrese el correo electrónico' }">
+    <div *dxTemplate="let data of 'content'">
+      <dx-text-box [(value)]="user.email"></dx-text-box>
+    </div>
+  </dxi-item>
+
+  <!-- Fecha de nacimiento -->
+  <dxi-item dataField="birthdate" [editorType]="'dxDateBox'" [editorOptions]="{ displayFormat: 'dd/MM/yyyy', placeholder: 'Seleccione la fecha de nacimiento' }">
+    <div *dxTemplate="let data of 'content'">
+      <dx-date-box [(value)]="user.birthdate"></dx-date-box>
+    </div>
+  </dxi-item>
+
+  <!-- Dirección -->
+  <dxi-item dataField="address" [colSpan]="2" [editorType]="'dxTextArea'" [editorOptions]="{ placeholder: 'Ingrese la dirección' }">
+    <div *dxTemplate="let data of 'content'">
+      <dx-text-area [(value)]="user.address"></dx-text-area>
+    </div>
+  </dxi-item>
+
+  <!-- Rol -->
+  <dxi-item dataField="rol" [editorType]="'dxSelectBox'" [editorOptions]="{ items: roles, placeholder: 'Seleccione un rol' }">
+    <div *dxTemplate="let data of 'content'">
+      <dx-select-box [(value)]="user.rol" [items]="roles"></dx-select-box>
+    </div>
+  </dxi-item>
+
+  <!-- Contraseña -->
+  <dxi-item dataField="password" [editorType]="'dxTextBox'" [editorOptions]="{ mode: 'password', placeholder: 'Ingrese la contraseña' }">
+    <div *dxTemplate="let data of 'content'">
+      <dx-text-box [(value)]="user.password" mode="password"></dx-text-box>
+    </div>
+  </dxi-item>
+
+  <!-- Botón -->
+  <dxi-item [colSpan]="2">
+    <div *dxTemplate="let data of 'content'" style="text-align: right">
+      <dx-button text="Guardar" type="success" (onClick)="onSubmit()"></dx-button>
+    </div>
+  </dxi-item>
+</dx-form>

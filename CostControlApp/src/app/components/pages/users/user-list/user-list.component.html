@@ -1,0 +1,15 @@
+<div class="page-container">
+  <p>
+    <a class="btn btn-success" routerLink="/user-create">Nuevo Usuario</a>
+  </p>
+  <h2 class="page-title">Lista de Usuarios</h2>
+  <div class="item-list">
+    <div *ngFor="let item of users" class="item-card">
+      <h3 class="item-name">{{ item.firstName }} {{ item.lastName }}</h3>
+      <p class="item-description">{{ item.email }}</p>
+      <p class="item-description">{{ item.address }}</p>
+      <!--<button class="btn btn-success" routerLink="/user-update/{{item.id}}">Modificar</button>
+      <button class="btn btn-success" (click)="deleteExpenseType(item.id)" >Borrar</button>-->
+    </div>
+  </div>
+</div>

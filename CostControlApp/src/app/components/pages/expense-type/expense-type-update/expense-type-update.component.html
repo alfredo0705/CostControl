@@ -1,0 +1,37 @@
+<h2 class="page-title">Nuevo Tipo de Gasto</h2>
+
+<div class="form-container">
+  <dx-form [formData]="expenseType" [colCount]="1" labelLocation="top" (onSubmit)="onSubmit()">
+    <dxi-item
+      dataField="name"
+      [label]="{ text: 'Nombre del Gasto' }"
+      [editorType]="'dxTextBox'"
+      [editorOptions]="{ placeholder: 'Ej. Alimentación, Transporte', stylingMode: 'filled' }"
+    ></dxi-item>
+
+    <dxi-item
+      dataField="description"
+      [label]="{ text: 'Descripción' }"
+      [editorType]="'dxTextArea'"
+      [editorOptions]="{ placeholder: 'Descripción del tipo de gasto', height: 90, stylingMode: 'filled' }"
+    ></dxi-item>
+  </dx-form>
+</div>
+
+<div class="button-container">
+      <dx-button
+        text="Guardar"
+        type="success"
+        stylingMode="contained"
+        width="120"
+        (onClick)="onSubmit()"
+      ></dx-button>
+      <dx-button
+        text="Cancelar"
+        type="danger"
+        stylingMode="contained"
+        width="120"
+        (onClick)="goBack()"
+      ></dx-button>
+</div>
+
