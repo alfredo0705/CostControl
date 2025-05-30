@@ -2,7 +2,6 @@
 using CostControl.Application.DTOs.Expense;
 using CostControl.Application.DTOs.Movement;
 using CostControl.Application.Features.Expense.Requests.Commands;
-using CostControl.Application.Features.Expense.Requests.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,14 +26,7 @@ namespace CostControl.API.Controllers
             if (resul.Success)
                 return NoContent();
 
-            return BadRequest(resul.Message);
+            return BadRequest(new {message = resul.Message});
         }
-
-        [HttpGet("movements")]
-        public async Task<ActionResult> GetMovements([FromQuery] MovementFilterDto filter)
-        {
-            return Ok(await _mediator.Send(new GetUserMovementsRequest { MovementFilterDto = filter, UserId = User.GetUserId() }));
-        }
-
     }
 }

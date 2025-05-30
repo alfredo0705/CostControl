@@ -36,7 +36,6 @@ namespace CostControl.Application.Features.MonetaryFund.Handlers.Commands
                     Name = new(request.MonetaryFundCreateDto.Name),
                     Type = request.MonetaryFundCreateDto.Type,
                     InitialBalance = request.MonetaryFundCreateDto.InitialBalance,
-                    CurrentBalance = request.MonetaryFundCreateDto.InitialBalance,
                 };
 
                 await _unitOfWork.MonetaryFundRepository.AddAsync(monetaryFund);

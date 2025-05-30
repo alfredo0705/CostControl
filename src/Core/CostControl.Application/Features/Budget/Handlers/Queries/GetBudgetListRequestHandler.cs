@@ -16,7 +16,7 @@ namespace CostControl.Application.Features.Budget.Handlers.Queries
 
         public async Task<List<BudgetDto>> Handle(GetBudgetListRequest request, CancellationToken cancellationToken)
         {
-            var budgets = await _unitOfWork.BudgetRepository.GetByUserIdAndMonthAsync(request.UserId, request.Year, request.Month);
+            var budgets = await _unitOfWork.BudgetRepository.GetByUserIdAndMonthAsync(request.UserId, request.Period);
 
             return budgets.ToList();
         }

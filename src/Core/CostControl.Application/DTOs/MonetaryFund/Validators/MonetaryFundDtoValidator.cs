@@ -13,7 +13,7 @@ namespace CostControl.Application.DTOs.MonetaryFund.Validators
 
             RuleFor(x => x.Type)
                 .NotEmpty().WithMessage("El tipo de fondo es obligatorio.")
-                .Must(type => type == "Efectivo" || type == "Cuenta Bancaria")
+                .Must(type => type == "Caja Menor" || type == "Cuenta Bancaria")
                 .WithMessage("El tipo de fondo debe ser 'Efectivo' o 'Cuenta Bancaria'.");
 
             RuleFor(x => x.InitialBalance)

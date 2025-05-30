@@ -51,7 +51,11 @@ namespace CostControl.Persistence.Repositories
         public async Task<IEnumerable<MonetaryFundDto>> GetFundsByUserIdAsync()
         {
             return await _context.MonetaryFunds
+                .Include(d => d.Deposits)
+                .Include(e => e.Expenses)
+                    .ThenInclude(ed => ed.Details)
                 .AsNoTracking()
+                .Where(m => !m.IsDeleted)
                 .ProjectTo<MonetaryFundDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
         }
@@ -60,7 +64,7 @@ namespace CostControl.Persistence.Repositories
         {
             var monetary = await _context.MonetaryFunds.FindAsync(monetaryFundDto.Id);
             monetary.Name = new(monetaryFundDto.Name);
-            monetary.CurrentBalance = monetaryFundDto.CurrentBalance;
+            monetary.InitialBalance = monetaryFundDto.InitialBalance;
             monetary.Type = monetaryFundDto.Type;
 
             _context.MonetaryFunds.Update(monetary);

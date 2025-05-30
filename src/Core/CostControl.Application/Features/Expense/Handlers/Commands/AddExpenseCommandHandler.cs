@@ -43,8 +43,7 @@ namespace CostControl.Application.Features.Expense.Handlers.Commands
                         var budget = await _unitOfWork.BudgetRepository.GetByUserIdTypeAndMonthAsync(
                             request.ExpenseCreateDto.UserId,
                             detailDto.ExpenseTypeId,
-                            request.ExpenseCreateDto.Date.Year,
-                            request.ExpenseCreateDto.Date.Month
+                            request.ExpenseCreateDto.Date
                         );
 
                         var spentSoFar = await _unitOfWork.ExpenseDetailsRepository.SpentSoFar(
@@ -57,7 +56,8 @@ namespace CostControl.Application.Features.Expense.Handlers.Commands
                         if (budget != null && spentSoFar + detailDto.Amount > budget.Amount)
                         {
                             var exceeded = spentSoFar + detailDto.Amount - budget.Amount;
-                            overSpent.Add($"Tipo de gasto ID {detailDto.ExpenseTypeId}: Excedido en {exceeded:C}, Presupuesto: {budget.Amount:C}");
+                            var expenseType = await _unitOfWork.ExpenseTypeRepository.GetByIdAsync(detailDto.ExpenseTypeId);
+                            overSpent.Add($"Tipo de gasto {expenseType.Name}: Excedido en {exceeded:C}, Presupuesto: {budget.Amount:C}");
                         }
 
                         header.Details.Add(new ExpenseDetail

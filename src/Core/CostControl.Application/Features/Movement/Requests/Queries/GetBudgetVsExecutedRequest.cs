@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CostControl.Application.Features.Budget.Requests.Queries
+namespace CostControl.Application.Features.Movement.Requests.Queries
 {
     public class GetBudgetVsExecutedRequest : IRequest<List<BudgetVsExecutedDto>>
     {

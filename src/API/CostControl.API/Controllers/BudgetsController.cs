@@ -22,7 +22,8 @@ namespace CostControl.API.Controllers
         [HttpGet("getBudgets")]
         public async Task<ActionResult<List<BudgetDto>>> GetBudgets(int year, int month)
         {
-            return Ok(await _mediator.Send(new GetBudgetListRequest { UserId = User.GetUserId(), Year = year, Month = month }));
+            var period = new DateTime(year, month, 1, 0, 0, 0);
+            return Ok(await _mediator.Send(new GetBudgetListRequest { UserId = User.GetUserId(), Period = period }));
         }
 
         [HttpGet("getBudget")]
@@ -38,7 +39,7 @@ namespace CostControl.API.Controllers
             if (result.Success)
                 return NoContent();
 
-            return BadRequest(result.Message);
+            return BadRequest(new { message = result.Message });
         }
 
         [HttpPut("updateBudget")]
@@ -48,7 +49,7 @@ namespace CostControl.API.Controllers
             if (result.Success)
                 return NoContent();
 
-            return BadRequest(result.Message);
+            return BadRequest(new { message = result.Message });
         }
 
         [HttpDelete("deleteBudget")]
@@ -58,14 +59,7 @@ namespace CostControl.API.Controllers
             if (result.Success)
                 return NoContent();
 
-            return BadRequest(result.Message);
-        }
-
-        [HttpPost("budget-vs-executed")]
-        public async Task<IActionResult> GetBudgetVsExecuted([FromBody] BudgetExecutionFilterDto filter)
-        {
-            var userId = User.GetUserId();
-            return Ok(await _mediator.Send(new GetBudgetVsExecutedRequest { UserId = userId, BudgetExecutionFilterDto = filter }));
+            return BadRequest(new { message = result.Message });
         }
     }
 }

@@ -36,7 +36,7 @@ namespace CostControl.API.Controllers
             if (result.Success)
                 return NoContent();
 
-            return BadRequest(result.Message);
+            return BadRequest(new { message = result.Message });
         }
 
         [HttpPut("updateExpenseType")]
@@ -47,7 +47,7 @@ namespace CostControl.API.Controllers
             if (result.Success)
                 return NoContent();
 
-            return BadRequest(result.Message);
+            return BadRequest(new { message = result.Message });
         }
 
         [HttpDelete("deleteExpenseType")]
@@ -58,7 +58,7 @@ namespace CostControl.API.Controllers
             if (result.Success)
                 return NoContent();
 
-            return BadRequest(result.Message);
+            return BadRequest(new { message = result.Message });
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CostControl.Application.Contracts.Persistence;
+using CostControl.Application.DTOs.Budget;
 using CostControl.Application.DTOs.Budget.Validator;
 using CostControl.Application.Features.Budget.Requests.Commands;
 using CostControl.Application.Responses;
@@ -34,20 +35,34 @@ namespace CostControl.Application.Features.Budget.Handlers.Commands
                         return response;
                     }
 
-                    var budget = new Domain.Entity.Budget
+                    if (item.Id == 0)
                     {
-                        Amount = item.Amount,
-                        AppUserId = request.UserId,
-                        ExpenseTypeId = item.ExpenseTypeId,
-                        Month = item.Month,
-                        Year = item.Year
-                    };
+                        var budget = new Domain.Entity.Budget
+                        {
+                            Amount = item.Amount,
+                            AppUserId = request.UserId,
+                            ExpenseTypeId = item.ExpenseTypeId,
+                            Period = item.Period
+                        };
 
-                    await _unitOfWork.BudgetRepository.AddAsync(budget);
+                        await _unitOfWork.BudgetRepository.AddAsync(budget);
+                    }else
+                    {
+                        var updateBudget = new BudgetUpdateDto
+                        {
+                            Id = item.Id,
+                            Amount = item.Amount,
+                            AppUserId = request.UserId,
+                            ExpenseTypeId = item.ExpenseTypeId,
+                            Period = item.Period
+                        };
 
+                        await _unitOfWork.BudgetRepository.UpdateAsync(updateBudget);
+                    }
                 }
 
-                await _unitOfWork.SaveAsync();
+                if (_unitOfWork.HasChanges())
+                    await _unitOfWork.SaveAsync();
 
                 response.Success = true;
                 response.Message = "Creación exitosa";

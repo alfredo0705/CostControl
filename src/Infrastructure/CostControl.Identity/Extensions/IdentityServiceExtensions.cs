@@ -36,6 +36,9 @@ namespace CostControl.Identity.Extensions
                 services.AddIdentityCore<AppUser>(opt =>
                 {
                     opt.Password.RequireNonAlphanumeric = false;
+                    opt.Password.RequireDigit = false;
+                    opt.Password.RequireUppercase = false;
+                    opt.Password.RequiredLength = 5;
                 })
                 .AddRoles<AppRole>()
                 .AddRoleManager<RoleManager<AppRole>>()
@@ -69,13 +72,6 @@ namespace CostControl.Identity.Extensions
                             }
                         };
                     });
-
-                // Configuración de Autorización y Políticas de Roles
-                services.AddAuthorization(opt =>
-                {
-                    opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
-                    opt.AddPolicy("RequiredAgencyRole", policy => policy.RequireRole("Admin", "User"));
-                });
 
                 // Inyección de dependencias personalizadas
                 services.AddScoped<ITokenService, TokenService>();

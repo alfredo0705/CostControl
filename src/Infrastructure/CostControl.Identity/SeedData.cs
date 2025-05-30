@@ -39,7 +39,7 @@ namespace CostControl.Identity
                 };
 
                 // Crear usuario con contraseña
-                var result = await userManager.CreateAsync(admin, "Pa$$w0rd");
+                var result = await userManager.CreateAsync(admin, "admin");
                 if (result.Succeeded)
                 {
                     var role = await roleManager.FindByNameAsync("Admin");

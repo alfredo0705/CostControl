@@ -4,6 +4,7 @@ using CostControl.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CostControl.Persistence.Migrations
 {
     [DbContext(typeof(CostControlDbContext))]
-    partial class CostControlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250529042935_update")]
+    partial class update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,8 +60,11 @@ namespace CostControl.Persistence.Migrations
                     b.Property<DateTime?>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Period")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("Month")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -102,12 +108,17 @@ namespace CostControl.Persistence.Migrations
                     b.Property<int>("MonetaryFundId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("MonetaryFundId1")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MonetaryFundId");
+
+                    b.HasIndex("MonetaryFundId1");
 
                     b.ToTable("Deposits", (string)null);
                 });
@@ -149,6 +160,9 @@ namespace CostControl.Persistence.Migrations
                     b.Property<int>("MonetaryFundId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("MonetaryFundId1")
+                        .HasColumnType("int");
+
                     b.Property<string>("Notes")
                         .IsRequired()
                         .HasMaxLength(500)
@@ -165,6 +179,8 @@ namespace CostControl.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("MonetaryFundId");
+
+                    b.HasIndex("MonetaryFundId1");
 
                     b.ToTable("Expenses", (string)null);
                 });
@@ -305,10 +321,14 @@ namespace CostControl.Persistence.Migrations
             modelBuilder.Entity("CostControl.Domain.Entity.Deposit", b =>
                 {
                     b.HasOne("CostControl.Domain.Entity.MonetaryFund", "MonetaryFund")
-                        .WithMany("Deposits")
+                        .WithMany()
                         .HasForeignKey("MonetaryFundId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("CostControl.Domain.Entity.MonetaryFund", null)
+                        .WithMany("Deposits")
+                        .HasForeignKey("MonetaryFundId1");
 
                     b.Navigation("MonetaryFund");
                 });
@@ -316,10 +336,14 @@ namespace CostControl.Persistence.Migrations
             modelBuilder.Entity("CostControl.Domain.Entity.Expense", b =>
                 {
                     b.HasOne("CostControl.Domain.Entity.MonetaryFund", "MonetaryFund")
-                        .WithMany("Expenses")
+                        .WithMany()
                         .HasForeignKey("MonetaryFundId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("CostControl.Domain.Entity.MonetaryFund", null)
+                        .WithMany("Expenses")
+                        .HasForeignKey("MonetaryFundId1");
 
                     b.Navigation("MonetaryFund");
                 });

@@ -6,6 +6,6 @@ namespace CostControl.Application.Contracts.Persistence
     public interface IExpenseRepository
     {
         Task CreateExpenseAsync(Expense headerDto);
-        Task<IEnumerable<MovementDto>> GetUserMovementsAsync(int userId, MovementFilterDto filter);
+        Task<bool> ExpenseByMonetaryFundExist(int monetariFundId);
     }
 }

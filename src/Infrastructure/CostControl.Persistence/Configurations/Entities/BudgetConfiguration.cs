@@ -14,10 +14,7 @@ namespace CostControl.Persistence.Configurations.Entities
                 .HasColumnType("decimal(18,2)")
                 .IsRequired();
 
-            builder.Property(x => x.Month)
-                .IsRequired();
-
-            builder.Property(x => x.Year)
+            builder.Property(x => x.Period)
                 .IsRequired();
 
             builder.HasOne(x => x.ExpenseType)

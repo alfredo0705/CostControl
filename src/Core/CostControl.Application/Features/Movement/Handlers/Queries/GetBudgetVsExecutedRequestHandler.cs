@@ -1,6 +1,6 @@
 ﻿using CostControl.Application.Contracts.Persistence;
 using CostControl.Application.DTOs.BudgetVsExecute;
-using CostControl.Application.Features.Budget.Requests.Queries;
+using CostControl.Application.Features.Movement.Requests.Queries;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CostControl.Application.Features.Budget.Handlers.Queries
+namespace CostControl.Application.Features.Movement.Handlers.Queries
 {
     public class GetBudgetVsExecutedRequestHandler : IRequestHandler<GetBudgetVsExecutedRequest, List<BudgetVsExecutedDto>>
     {

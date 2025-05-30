@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\Expense\Handlers\Queries\GetUserMovementsRequestHandler.cs" />
+    <Compile Remove="Features\Expense\Requests\Queries\GetUserMovementsRequest.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="FluentValidation" Version="12.0.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
@@ -21,6 +26,8 @@
   <ItemGroup>
     <Folder Include="Features\Deposit\Handlers\Queries\" />
     <Folder Include="Features\Deposit\Requests\Queries\" />
+    <Folder Include="Features\Expense\Handlers\Queries\" />
+    <Folder Include="Features\Expense\Requests\Queries\" />
   </ItemGroup>
 
 </Project>

@@ -19,6 +19,13 @@ namespace CostControl.Application.Features.ExpenseType.Handlers.Commands
             var response = new BaseCommandResponse();
             try
             {
+                if (await _unitOfWork.BudgetRepository.GetByExpenseTypeAsync(request.Id))
+                {
+                    response.Success = false;
+                    response.Message = "No se puede eliminar este tipo de gasto porque está vinculado a uno o más presupuestos.";
+                    return response;
+                } 
+
                 await _unitOfWork.ExpenseTypeRepository.DeleteAsync(request.Id);
                 await _unitOfWork.SaveAsync();
 

@@ -11,7 +11,7 @@ namespace CostControl.Persistence.Configurations.Entities
             builder.HasKey(x => x.Id);
 
             builder.HasOne(x => x.MonetaryFund)
-                   .WithMany()
+                   .WithMany(x => x.Deposits)
                    .HasForeignKey(x => x.MonetaryFundId)
                    .OnDelete(DeleteBehavior.Restrict);
 

@@ -22,9 +22,15 @@ namespace CostControl.Persistence.Configurations.Entities
                    .HasMaxLength(50)
                    .IsRequired();
 
-            builder.Property(x => x.CurrentBalance)
-                   .HasColumnType("decimal(18,2)")
-                   .IsRequired();
+            builder.HasMany(x => x.Expenses)
+                   .WithOne(x => x.MonetaryFund)
+                   .HasForeignKey(x => x.MonetaryFundId)
+                   .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasMany(x => x.Deposits)
+                   .WithOne(x => x.MonetaryFund)
+                   .HasForeignKey(x => x.MonetaryFundId)
+                   .OnDelete(DeleteBehavior.Cascade);
 
             builder.ToTable("MonetaryFunds");
         }
